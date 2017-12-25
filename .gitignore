@@ -2,9 +2,9 @@
 !.gitignore
 !.gitattributes
 
+tags
+tinymudserver
 *.d
 *.o
 *.a
 *.out
-tags
-tinymudserver
