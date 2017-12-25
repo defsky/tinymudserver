@@ -239,8 +239,9 @@ void ProcessNewConnection ()
             ", from address " << address << 
             ", port " << port << endl;
       
-    *p << "\nWelcome to the Tiny MUD Server version " << VERSION << "\n"; 
-    *p << messagemap ["welcome"];   // message from message file
+    //*p << "\nWelcome to the Tiny MUD Server version " << VERSION << "\n"; 
+    *p << messagemap ["new_connection"] << VERSION << "\n"; 
+    *p << messagemap ["banner"];   // message from message file
     *p << p->prompt;    // initial prompt (Enter your name ...)
     
     } /* end of processing *all* new connections */

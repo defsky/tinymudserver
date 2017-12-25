@@ -3,10 +3,13 @@
 
 #include <set>
 #include <list>
+#include <map>
 
 #include <unistd.h>   // for close
 #include "strings.h"  // for ciLess
 #include "constants.h"  // for NO_SOCKET
+
+extern std::map<std::string, string, ciLess> messagemap;
 
 // connection states - add more to have more complex connection dialogs 
 typedef enum
@@ -63,7 +66,8 @@ public:
     connstate = eAwaitingName;
     room = INITIAL_ROOM;
     flags.clear ();
-    prompt = "Enter your name, or 'new' to create a new character ...  "; 
+    //prompt = "Enter your name, or 'new' to create a new character ...  "; 
+    prompt = messagemap["prompt_name"]; 
     }
     
   // what's our socket?

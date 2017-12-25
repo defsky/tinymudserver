@@ -28,7 +28,7 @@ void PlayerEnteredGame (tPlayer * p, const string & message)
 {
   p->connstate = ePlaying;    // now normal player
   p->prompt = PROMPT;         // default prompt
-  *p << "Welcome, " << p->playername << "\n\n"; // greet them
+  *p << messagemap ["welcome"] << p->playername << "\n\n"; // greet them
   *p << message;
   *p << messagemap ["motd"];  // message of the day
   p->DoCommand ("look");     // new player looks around
@@ -49,19 +49,22 @@ void ProcessPlayerName (tPlayer * p, istream & sArgs)
 
   /* name can't be blank */
   if (playername.empty ())
-    throw runtime_error ("Name cannot be blank.");
+    //throw runtime_error ("Name cannot be blank.");
+    throw runtime_error (messagemap["error_name_blank"]);
   
   /* don't allow two of the same name */
   if (FindPlayer (playername))
     throw runtime_error (playername + " is already connected.");
 
   if (playername.find_first_not_of (valid_player_name) != string::npos)
-    throw runtime_error ("That player name contains disallowed characters.");
+    //throw runtime_error ("That player name contains disallowed characters.");
+    throw runtime_error (messagemap["error_name_invalid"]);
         
   if (tolower (playername) == "new")
     {
     p->connstate = eAwaitingNewName;
-    p->prompt = "Please choose a name for your new character ... ";
+    //p->prompt = "Please choose a name for your new character ... ";
+    p->prompt = messagemap["prompt_new_name"];
     }   // end of new player
   else
     {   // old player
@@ -70,7 +73,8 @@ void ProcessPlayerName (tPlayer * p, istream & sArgs)
     p->Load ();   // load player so we know the password etc.
     
     p->connstate = eAwaitingPassword;
-    p->prompt = "Enter your password ... ";
+    //p->prompt = "Enter your password ... ";
+    p->prompt = messagemap["prompt_password"];
     p->badPasswordCount = 0;
     } // end of old player
         
@@ -83,23 +87,28 @@ void ProcessNewPlayerName (tPlayer * p, istream & sArgs)
   
   /* name can't be blank */
   if (playername.empty ())
-    throw runtime_error ("Name cannot be blank.");
+    //throw runtime_error ("Name cannot be blank.");
+    throw runtime_error (messagemap["error_name_blank"]);
 
   if (playername.find_first_not_of (valid_player_name) != string::npos)
-    throw runtime_error ("That player name contains disallowed characters.");
+    //throw runtime_error ("That player name contains disallowed characters.");
+    throw runtime_error (messagemap["error_name_invalid"]);
         
   // check for bad names here (from list in control file)
   if (badnameset.find (playername) != badnameset.end ())
-    throw runtime_error ("That name is not permitted.");
+    //throw runtime_error ("That name is not permitted.");
+    throw runtime_error (messagemap["error_name_banned"]);
     
   ifstream f ((PLAYER_DIR + tocapitals (playername) + PLAYER_EXT).c_str (), ios::in);
   if (f || FindPlayer (playername))  // player file on disk, or playing without saving yet
-    throw runtime_error ("That player already exists, please choose another name.");
+    //throw runtime_error ("That player already exists, please choose another name.");
+    throw runtime_error (messagemap["error_name_exist"]);
   
   p->playername = tocapitals (playername);
   
   p->connstate = eAwaitingNewPassword;
-  p->prompt = "Choose a password for " + p->playername + " ... ";  
+  //p->prompt = "Choose a password for " + p->playername + " ... ";  
+  p->prompt = messagemap["prompt_new_password"];  
   p->badPasswordCount = 0;
     
 } /* end of ProcessNewPlayerName */
@@ -111,11 +120,13 @@ void ProcessNewPassword (tPlayer * p, istream & sArgs)
   
   /* password can't be blank */
   if (password.empty ())
-    throw runtime_error ("Password cannot be blank.");
+    //throw runtime_error ("Password cannot be blank.");
+    throw runtime_error (messagemap["error_password_blank"]);
   
   p->password = password;
   p->connstate = eConfirmPassword;
-  p->prompt = "Re-enter password to confirm it ... ";
+  //p->prompt = "Re-enter password to confirm it ... ";
+  p->prompt = messagemap["prompt_password_reenter"];
     
 } /* end of ProcessNewPassword */
 
@@ -128,8 +139,10 @@ void ProcessConfirmPassword (tPlayer * p, istream & sArgs)
   if (password != p->password)
     {
     p->connstate = eAwaitingNewPassword;
-    p->prompt = "Choose a password for " + p->playername + " ... ";
-    throw runtime_error ("Password and confirmation do not agree.");
+    //p->prompt = "Choose a password for " + p->playername + " ... ";
+    p->prompt = messagemap["prompt_password"];
+    //throw runtime_error ("Password and confirmation do not agree.");
+    throw runtime_error (messagemap["error_password_confirm_failed"]);
     }
   
   // that player might have been created while we were choosing a password, so check again
@@ -137,8 +150,10 @@ void ProcessConfirmPassword (tPlayer * p, istream & sArgs)
   if (f || FindPlayer (password))  // player file on disk, or playing without saving yet
     {
     p->connstate = eAwaitingNewName;
-    p->prompt = "Please choose a name for your new character ... ";  // re-prompt for name
-    throw runtime_error ("That player already exists, please choose another name.");
+    //p->prompt = "Please choose a name for your new character ... ";  // re-prompt for name
+    p->prompt = messagemap["prompt_new_name"];  // re-prompt for name
+    //throw runtime_error ("That player already exists, please choose another name.");
+    throw runtime_error (messagemap["error_name_exist"]);
     }
   
   // New player now in the game
@@ -155,17 +170,21 @@ void ProcessPlayerPassword (tPlayer * p, istream & sArgs)
 
     /* password can't be blank */
     if (password.empty ())
-      throw runtime_error ("Password cannot be blank.");
+      //throw runtime_error ("Password cannot be blank.");
+      throw runtime_error (messagemap["error_password_blank"]);
         
     if (password != p->password)
-      throw runtime_error ("That password is incorrect.");
+      //throw runtime_error ("That password is incorrect.");
+      throw runtime_error (messagemap["error_password_incorrect"]);
 
     // check for "blocked" flag on this player
     if (p->HaveFlag ("blocked"))
       {
       p->ClosePlayer ();
-      p->prompt = "Goodbye.\n";
-      throw runtime_error ("You are not permitted to connect.");
+      //p->prompt = "Goodbye.\n";
+      p->prompt = messagemap["prompt_flag_blocked"];
+      //throw runtime_error ("You are not permitted to connect.");
+      throw runtime_error (messagemap["server_flag_blocked"]);
       }
       
     // OK, they're in!
@@ -178,7 +197,8 @@ void ProcessPlayerPassword (tPlayer * p, istream & sArgs)
     {
     if (++p->badPasswordCount >= MAX_PASSWORD_ATTEMPTS)
       {
-      *p << "Too many attempts to guess the password!\n";
+      //*p << "Too many attempts to guess the password!\n";
+      *p << messagemap["server_password_attempt_exceeded"];
       p->Init ();
       }
       throw;

@@ -58,7 +58,8 @@ int main ()
   MainLoop ();    // handle player input/output
 
   // game over - tell them all
-  SendToAll ("\n\n** Game shut down. **\n\n");
+  //SendToAll ("\n\n** Game shut down. **\n\n");
+  SendToAll (messagemap["server_down"]);
   
   CloseComms ();  // stop listening
 

@@ -181,8 +181,10 @@ void DoSay (tPlayer * p, istream & sArgs)
 {
   p->NeedNoFlag ("gagged"); // can't if gagged
   string what = GetMessage (sArgs, "Say what?");  // what
-  *p << "You say, \"" << what << "\"\n";  // confirm
-  SendToAll (p->playername + " says, \"" + what + "\"\n", 
+  //*p << "You say, \"" << what << "\"\n";  // confirm
+  *p << p->playername << "：" << what << "\n";  // confirm
+  //SendToAll (p->playername + " says, \"" + what + "\"\n", 
+  SendToAll (p->playername + "：" + what + "\n", 
             p, p->room);  // say it
 } // end of DoSay 
 
@@ -193,8 +195,10 @@ void DoTell (tPlayer * p, istream & sArgs)
   p->NeedNoFlag ("gagged"); // can't if gagged
   tPlayer * ptarget = p->GetPlayer (sArgs, "Tell whom?", true);  // who
   string what = GetMessage (sArgs, "Tell " + p->playername + " what?");  // what  
-  *p << "You tell " << p->playername << ", \"" << what << "\"\n";     // confirm
-  *ptarget << p->playername << " tells you, \"" << what << "\"\n";    // tell them
+  //*p << "You tell " << p->playername << ", \"" << what << "\"\n";     // confirm
+  *p << messagemap["server_tell_go_prefix"] << ptarget->playername << "：" << what << "\n";     // confirm
+  //*ptarget << p->playername << " tells you, \"" << what << "\"\n";    // tell them
+  *ptarget << p->playername << messagemap["server_tell_come_prefix"] << what << "\n";    // tell them
 } // end of DoTell
 
 void DoSave  (tPlayer * p, istream & sArgs)
@@ -219,7 +223,8 @@ void DoEmote (tPlayer * p, istream & sArgs)
 void DoWho (tPlayer * p, istream & sArgs)
 {
   NoMore (p, sArgs);  // check no more input
-  *p << "Connected players ...\n";
+  //*p << "Connected players ...\n";
+  *p << messagemap["server_connected_players"];
   
   int count = 0;
   for (tPlayerListIterator iter = playerlist.begin ();
@@ -353,6 +358,7 @@ void LoadCommands ()
   commandmap ["look"]     = DoLook;     // look around
   commandmap ["l"]        = DoLook;     // synonymm for look
   commandmap ["quit"]     = DoQuit;     // bye bye
+  commandmap ["bye"]      = DoQuit;     // bye bye
   commandmap ["say"]      = DoSay;      // say something
   commandmap ["\""]       = DoSay;      // synonym for say
   commandmap ["tell"]     = DoTell;     // tell someone
