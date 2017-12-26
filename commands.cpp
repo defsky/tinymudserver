@@ -80,11 +80,13 @@ void DoDirection (tPlayer * p, const string & sArgs)
  tExitMap::const_iterator exititer = r->exits.find (sArgs);    
 
   if (exititer == r->exits.end ())
-    throw runtime_error ("You cannot go that way.");
+    //throw runtime_error ("You cannot go that way.");
+    throw runtime_error (messagemap["error_not_exist"]);
 
   // move player
   PlayerToRoom (p, exititer->second,
-                "You go " + sArgs + "\n",
+                //"You go " + sArgs + "\n",
+                "",
                 p->playername + " goes " + sArgs + "\n",
                 p->playername + " enters.\n");
   
@@ -141,7 +143,8 @@ void DoLook (tPlayer * p, istream & sArgs)
   // show available exits
   if (!r->exits.empty ())
     {
-    *p << "Exits: ";
+    //*p << "Exits: ";
+    *p << "    " << messagemap["server_exits_prefix"];
     for (tExitMap::const_iterator exititer = r->exits.begin ();
          exititer != r->exits.end (); ++exititer)
       *p << exititer->first << " ";

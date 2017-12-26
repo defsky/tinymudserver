@@ -240,7 +240,7 @@ void ProcessNewConnection ()
             ", port " << port << endl;
       
     //*p << "\nWelcome to the Tiny MUD Server version " << VERSION << "\n"; 
-    *p << messagemap ["new_connection"] << VERSION << "\n"; 
+    *p << messagemap ["new_connection"] << "\n"; 
     *p << messagemap ["banner"];   // message from message file
     *p << p->prompt;    // initial prompt (Enter your name ...)
     

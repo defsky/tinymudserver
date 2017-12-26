@@ -1,5 +1,5 @@
 1000 
-双虎客栈%r%r你正站在一间宽敞大厅中间。这里看起来像是古装剧里经常出现的那种客栈的样子。%r
+友家客栈 -%r    你正站在一间宽敞大厅中间。这里看起来像是古装剧里经常出现的那种客栈的样子。%r
 n 1004 s 1001 e 1002 w 1003
 1001
 Room 1001.%rYou are in room 1001. It could look better. What a let-down! This rooms has no alabaster walls, no mystic fireplace, no marble floors.

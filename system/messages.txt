@@ -1,25 +1,27 @@
-error_name_invalid 角色名含有不可用的字符
-error_name_blank 角色名不能为空
-error_name_banned 角色名不可用
-error_name_exist 角色名已存在
-error_player_not_exist 角色不存再
-error_password_blank 密码不能为空
-error_password_incorrect 密码不正确
-error_password_confirm_failed 两次密码不一致
-server_down %r%r** 服务器已关闭 **%r%r
-server_flag_blocked 你被禁止连接到服务器
-server_password_attempt_exceeded 密码尝试次数过多！%r
-server_connected_players 在线玩家：
-server_tell_go_prefix 你悄悄地告诉
-server_tell_come_prefix 悄悄地告诉你：
-prompt_name 请输入角色名，或者输入(new)创建新角色：
-prompt_new_name 请输入新的角色名：
-prompt_password 请输入密码：
-prompt_new_password 请设置密码：
-prompt_password_reenter 请再次输入密码：
-prompt_flag_blocked 再见！%r
-new_connection %rWelcome to the Tiny MUD Server Ver.
-banner %r|-------------------- Tiny MUD Server --------------------|%r|%r| Written by Nick Gammon.%r|%r| July 2004.%r|%r| http://www.gammon.com.au/%r|%r| 欢迎来到这个未知的世界，享受属于自己的冒险之旅吧！%r|---------------------------------------------------------|%r%r
+error_name_invalid                          角色名含有不可用的字符
+error_name_blank                            角色名不能为空
+error_name_banned                           角色名不可用
+error_name_exist                            角色名已存在
+error_player_not_exist                      角色不存再
+error_password_blank                        密码不能为空
+error_password_incorrect                    密码不正确
+error_password_confirm_failed               两次密码不一致
+error_not_exist                             那边好像没有路
+server_down                                 %r%r** 服务器已关闭 **%r%r
+server_flag_blocked                         你被禁止连接到服务器
+server_password_attempt_exceeded            密码尝试次数过多！%r
+server_connected_players                    在线玩家：
+server_tell_go_prefix                       你悄悄地告诉
+server_tell_come_prefix                     悄悄地告诉你：
+server_exits_prefix                         这里明显的出口是：
+prompt_name                                 请输入角色名，或者输入(new)创建新角色：
+prompt_new_name                             请输入新的角色名：
+prompt_password                             请输入密码：
+prompt_new_password                         请设置密码：
+prompt_password_reenter                     请再次输入密码：
+prompt_flag_blocked                         再见！%r
+new_connection                              %rWelcome to the MUD World.
+banner %r|----------------------- 未知世界 ------------------------|%r|%r|    欢迎来到这个未知的世界，开启属于自己的冒险之旅。%r|%r|%r|%r|%r|%r|                                          Powered by def%r----------------------------------------------------------|%r%r
 welcome %r你好, 
 new_player 欢迎来到MUD世界! 请查看帮助(help)文档了解我们的规则 :)%r%r
 existing_player 欢迎回来!%r%r
