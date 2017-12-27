@@ -1,18 +1,18 @@
 1000 
-友家客栈 -%r    你正站在一间宽敞大厅中间。这里看起来像是古装剧里经常出现的那种客栈的样子。%r
+游戏大厅 -%r    你正站在一间宽敞大厅中间，这里是客人玩游戏的地方。%r
 n 1004 s 1001 e 1002 w 1003
 1001
-Room 1001.%rYou are in room 1001. It could look better. What a let-down! This rooms has no alabaster walls, no mystic fireplace, no marble floors.
+休息室 -%r    这里是客人休息的地方，屋子中间有一张茶几，墙边有几张沙发整齐的摆放着。%r
 n 1000
 1002
-Room 1002.%rYou lounge around in room 1002. The floors are carpeted with a sort of wool-nylon blend, so favoured in caverns these days. There is a corridor to the east.
+过道 -%r    从墙上显眼的标示牌(notice)可以看出这条过道再往东可以通往洗手间。%r
 w 1000 e 1005
 1003
-Room 1003.%rThis rooms looks as if it has been rough-hewn from the very granite that forms the basis of the world itself. Unfortunately the general effect is submerged somewhat by the presence of many audio CDs stuck to the wall with sticky tape.
+餐厅 -%r    这里是客人用餐的地方，时不时的就会飘来一阵食物的香味，刺激着你的嗅觉神经，让你也忍不住想要过去尝点这美味佳肴。%r
 e 1000
 1004
-Room 1004.%rThis is the training room. One day you might receive all sorts of interesting training here. Perhaps you might even purchase shields and armour. But not today.
+大堂 -%r    这里看起来像是个大堂，不远处有个接待处，不过现在好像没有人在那里。%r
 s 1000
 1005
-Eastern corridor (room 1005).%rThis east-west corridor looks like it could be interesting to follow.
+洗手间 -%r    这里是个装修很现代化风格的洗手间，入口处有个烘手机，供客人快速烘干手上的水，从门上的标示牌(flag)可以很容易的看得出左边(left)是男洗手间，右边(right)是女洗手间。%r
 w 1002
