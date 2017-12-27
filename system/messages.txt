@@ -1,10 +1,11 @@
-error_name_invalid                          角色名含有不可用的字符
-error_name_blank                            角色名不能为空
-error_name_banned                           角色名不可用
-error_name_exist                            角色名已存在
-error_player_not_exist                      角色不存再
-error_password_blank                        密码不能为空
-error_password_incorrect                    密码不正确
+error_name_invalid                          角色ID含有不可用的字符
+error_name_blank                            角色ID不能为空
+error_name_banned                           角色ID不可用
+error_name_exist                            角色ID已存在
+error_name_online                           已经登陆
+error_player_not_exist                      角色ID不存在
+error_password_blank                        请输入密码
+error_password_incorrect                    角色ID或密码不正确
 error_password_confirm_failed               两次密码不一致
 error_not_exist                             那边好像没有路
 server_down                                 %r%r** 服务器已关闭 **%r%r
@@ -14,8 +15,10 @@ server_connected_players                    在线玩家：
 server_tell_go_prefix                       你悄悄地告诉
 server_tell_come_prefix                     悄悄地告诉你：
 server_exits_prefix                         这里明显的出口是：
-prompt_name                                 请输入角色名，或者输入(new)创建新角色：
-prompt_new_name                             请输入新的角色名：
+server_player_joined                        从这个世界的某个角落上线了
+prompt_name                                 请输入角色ID，或者输入(new)创建新角色：
+prompt_new_name                             请输入新的角色ID：
+prompt_new_surname                          请输入新的中文名字：
 prompt_password                             请输入密码：
 prompt_new_password                         请设置密码：
 prompt_password_reenter                     请再次输入密码：

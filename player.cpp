@@ -75,8 +75,12 @@ void tPlayer::Load ()
 {
   ifstream f ((PLAYER_DIR + playername + PLAYER_EXT).c_str (), ios::in);
   if (!f)
+  {
     //throw runtime_error ("That player does not exist, type 'new' to create a new one.");
-    throw runtime_error (messagemap["error_player_not_exist"]);
+    //throw runtime_error (messagemap["error_player_not_exist"]);
+    cerr << "Player ID : " << playername << " from " << address << " not exist" << endl;
+    return;
+  }
   
   // read player details
   f >> password;

@@ -35,7 +35,8 @@ void PlayerEnteredGame (tPlayer * p, const string & message)
 
   // tell other players
   SendToAll (
-    "Player " + p->playername + " has joined the game from " + p->GetAddress () + ".\n", 
+    //"Player " + p->playername + " has joined the game from " + p->GetAddress () + ".\n", 
+    p->playername + messagemap["server_player_joined"], 
     p);
   
   // log it
@@ -54,7 +55,8 @@ void ProcessPlayerName (tPlayer * p, istream & sArgs)
   
   /* don't allow two of the same name */
   if (FindPlayer (playername))
-    throw runtime_error (playername + " is already connected.");
+    //throw runtime_error (playername + " is already connected.");
+    throw runtime_error (playername + messagemap["error_name_online"]);
 
   if (playername.find_first_not_of (valid_player_name) != string::npos)
     //throw runtime_error ("That player name contains disallowed characters.");
