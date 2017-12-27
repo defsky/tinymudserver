@@ -36,7 +36,8 @@ void PeriodicUpdates ()
     // send new command if it is time
   if (time (NULL) > (tLastMessage + MESSAGE_INTERVAL))
     {
-    SendToAll ("You hear creepy noises ...\n");
+    //SendToAll ("You hear creepy noises ...\n");
+    SendToAll ("游戏大厅传来一阵嘈杂的声音 ...\n");
     tLastMessage = time (NULL);
     }
     
