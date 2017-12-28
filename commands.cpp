@@ -149,7 +149,20 @@ void DoLook (tPlayer * p, istream & sArgs)
     *p << "    " << messagemap["server_exits_prefix"];
     for (tExitMap::const_iterator exititer = r->exits.begin ();
          exititer != r->exits.end (); ++exititer)
-      *p << exititer->first << " ";
+    {
+      if (exititer != r->exits.begin() && ++exititer == r->exits.end())
+      {
+        *p << "和 " << (--exititer)->first;
+      }
+      else
+      {
+        if (exititer == r->exits.begin())
+        {
+          ++exititer;
+        }
+        *p << (--exititer)->first << " ";
+      }
+    }
     *p << "\n";        
     }
   
