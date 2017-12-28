@@ -16,3 +16,5 @@ eu eastup
 ed eastdown
 wu westup
 wd westdown
+l look
+

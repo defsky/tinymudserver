@@ -127,7 +127,9 @@ void DoLook (tPlayer * p, istream & sArgs)
   // TODO: add: look (thing)
 
   string whichObject;
-  sArgs >> ws >> whichObject;
+  //sArgs >> ws >> whichObject;
+  sArgs >> ws;
+  getline(sArgs,whichObject);
 
   if (!whichObject.empty ())
     {
@@ -381,9 +383,8 @@ void ProcessCommand (tPlayer * p, istream & sArgs)
 void LoadCommands ()
   {
   commandmap ["look"]     = DoLook;     // look around
-  commandmap ["l"]        = DoLook;     // synonymm for look
+  //commandmap ["l"]        = DoLook;     // synonymm for look
   commandmap ["quit"]     = DoQuit;     // bye bye
-  commandmap ["bye"]      = DoQuit;     // bye bye
   commandmap ["say"]      = DoSay;      // say something
   commandmap ["\""]       = DoSay;      // synonym for say
   commandmap ["tell"]     = DoTell;     // tell someone
