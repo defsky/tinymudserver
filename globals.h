@@ -19,6 +19,8 @@ extern std::map<std::string, tHandler> commandmap;
 extern std::map<tConnectionStates, tHandler> statemap;
 // messages
 extern std::map<std::string, string, ciLess> messagemap;
+// command alias
+extern std::map<std::string, string, ciLess> commandaliasmap;
 // directions
 extern std::set<std::string, ciLess> directionset;
 

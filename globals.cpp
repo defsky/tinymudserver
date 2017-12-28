@@ -33,6 +33,8 @@ map<string, tHandler> commandmap;
 map<tConnectionStates, tHandler> statemap;
 // messages
 map<string, string, ciLess> messagemap;
+// command alias
+map<string, string, ciLess> commandaliasmap;
 // directions
 set<string, ciLess> directionset;
 // bad player names

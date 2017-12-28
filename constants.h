@@ -18,6 +18,7 @@ static const string PLAYER_DIR    = "./players/";    // location of player files
 static const string PLAYER_EXT    = ".player";       // suffix for player files
 static const char * MESSAGES_FILE = "./system/messages.txt";  // messages
 static const char * CONTROL_FILE  = "./system/control.txt";   // control file
+static const char * COMMAND_ALIAS_FILE    = "./system/command_alias.txt";      // rooms file
 static const char * ROOMS_FILE    = "./rooms/rooms.txt";      // rooms file
 // player names must consist of characters from this list
 static const string valid_player_name = 

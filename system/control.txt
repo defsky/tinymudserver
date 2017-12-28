@@ -1,3 +1,3 @@
-north south east west up down northeast northwest southeast southwest enter leave
+north south east west up down northeast northwest southeast southwest northup northdown southup southdown eastup eastdown westup westdown enter out
 new god admin quit n s e w u d look me self north south east west up down northeast northwest southeast southwest enter leave
 10.1.2.3

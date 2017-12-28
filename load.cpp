@@ -143,6 +143,29 @@ void LoadRooms ()
 
 } // end of LoadRooms
 
+void LoadCommandAlias ()
+{
+  // format is: <alias> <command>
+  //  eg. n north
+  //
+  ifstream fCMDAlias (COMMAND_ALIAS_FILE, ios::in);
+  if (!fCMDAlias)
+    {
+    cerr << "Could not open command alias file: " << COMMAND_ALIAS_FILE << endl;
+    return;
+    }
+
+  while (!(fCMDAlias.eof ()))
+    {
+    string sAlias, sCommand;
+    fCMDAlias >> sAlias >> ws;
+    getline (fCMDAlias, sCommand);
+    if (!(sAlias.empty ()))
+      commandaliasmap [tolower (sAlias)] = sCommand;
+    } // end of read loop
+
+} // end of LoadCommandAlias
+
 // build up our commands map and connection states
 void LoadThings ()
 {
@@ -152,6 +175,7 @@ void LoadThings ()
 
   // load files
   LoadControlFile ();
+  LoadCommandAlias();
   LoadMessages ();
   LoadRooms ();
 

@@ -355,6 +355,13 @@ void ProcessCommand (tPlayer * p, istream & sArgs)
   string command;
   sArgs >> command >> ws;   // get command, eat whitespace after it
   
+  // check command alias map
+  map<string, string, ciLess>::const_iterator cmd_alias_itr = commandaliasmap.find (command);
+  if (cmd_alias_itr != commandaliasmap.end())
+  {
+    command = cmd_alias_itr->second;
+  }    
+
   // first see if they have entered a movement command (eg. n, s, e, w)
   set<string>::const_iterator direction_iter = directionset.find (command);
   if (direction_iter != directionset.end ())
