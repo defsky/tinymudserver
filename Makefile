@@ -1,5 +1,5 @@
 CC=g++
-CCFLAGS=-g3 -Wall -w -pedantic -fmessage-length=0
+CCFLAGS=-g3 -Wall -w -pedantic -fmessage-length=0 -liconv
 
 O_FILES = tinymudserver.o strings.o player.o load.o commands.o states.o globals.o comms.o room.o
 

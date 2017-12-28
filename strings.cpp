@@ -117,4 +117,30 @@ pair<string, string> GetWord (const string & s)
   
 } /* end of GetWord */
 
-  
+string translate_to_charset(char *to_charset, char *from_charset, const string &s, size_t out_buffer_len)
+{
+    iconv_t ch = iconv_open(to_charset,from_charset);
+
+    if (!ch)
+    {
+        return "";
+    }
+
+    size_t inlen = s.length();
+    size_t outlen = out_buffer_len;
+    char* inbuf =(char*) s.c_str();
+    char outbuf[outlen];
+    memset(outbuf,0,outlen);
+
+    char* poutbuf = outbuf;
+    if (iconv(ch,&inbuf,&inlen,&poutbuf,&outlen) == -1)
+    {
+        return "";
+    }
+
+    //string strTemp(outbuf);
+    iconv_close(ch);
+    
+    //return strTemp;
+    return string(outbuf);
+}

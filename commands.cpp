@@ -102,9 +102,11 @@ void DoQuit (tPlayer * p, istream & sArgs)
   
   if (p->connstate == ePlaying)
     {
-    *p << "See you next time!\n";
+    //*p << "See you next time!\n";
+    *p << messagemap["server_goodbye"];
     cout << "Player " << p->playername << " has left the game.\n";
-    SendToAll ("Player " + p->playername + " has left the game.\n", p);   
+    //SendToAll ("Player " + p->playername + " has left the game.\n", p);   
+    SendToAll (p->playername + messagemap["server_player_leaved"], p);   
     } /* end of properly connected */
 
   p->ClosePlayer ();

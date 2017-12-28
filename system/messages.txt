@@ -15,7 +15,9 @@ server_connected_players                    在线玩家：
 server_tell_go_prefix                       你悄悄地告诉
 server_tell_come_prefix                     悄悄地告诉你：
 server_exits_prefix                         这里明显的出口是：
-server_player_joined                        从这个世界的某个角落上线了
+server_player_joined                        从这个世界的某个角落上线了%r
+server_player_leaved                        从这个世界的某个角落下线了%r
+server_goodbye                              %r%r记得常回来看看...%r%r
 prompt_name                                 请输入角色ID，或者输入(new)创建新角色：
 prompt_new_name                             请输入新的角色ID：
 prompt_new_surname                          请输入新的中文名字：

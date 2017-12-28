@@ -83,7 +83,7 @@ public:
   template<typename T>
   tPlayer & operator<< (const T & i)  
     {     
-    outbuf += MAKE_STRING (i); 
+    outbuf += translate_to_charset("gb2312","utf-8",MAKE_STRING (i),2048); 
     return *this; 
     }
   

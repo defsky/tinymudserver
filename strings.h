@@ -2,6 +2,8 @@
 #define TINYMUDSERVER_STRINGS_H
 
 #include <ctype.h>   // for toupper, tolower
+#include <iconv.h>
+#include <memory.h>
 
 // strings.h - string functions
 
@@ -67,5 +69,7 @@ bool ciStringEqual (const string & s1, const string & s2);
 // split a string into first word, rest-of-line
 pair<string, string> GetWord (const string & s);
   
+string translate_to_charset(char *to_charset, char *from_charset, const string &s, size_t out_buffer_len = 255);
+
 #endif // TINYMUDSERVER_STRINGS_H
 
