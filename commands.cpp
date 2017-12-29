@@ -40,6 +40,9 @@ string GetMessage (istream & sArgs, const string & noMessageError)
   string message;
   sArgs >> ws;  // skip leading spaces
   getline (sArgs, message); // get rest of line
+
+  //message = translate_to_charset("utf-8","gb2312",message,1024);
+
   if (message.empty ()) // better have something
     throw runtime_error (noMessageError);
   return message;  
@@ -87,8 +90,8 @@ void DoDirection (tPlayer * p, const string & sArgs)
   PlayerToRoom (p, exititer->second,
                 //"You go " + sArgs + "\n",
                 "",
-                p->playername + " goes " + sArgs + "\n",
-                p->playername + " enters.\n");
+                p->playername + " goes " + sArgs + "\n\r",
+                p->playername + " enters.\n\r");
   
   } // end of DoDirection
   
@@ -104,7 +107,7 @@ void DoQuit (tPlayer * p, istream & sArgs)
     {
     //*p << "See you next time!\n";
     *p << messagemap["server_goodbye"];
-    cout << "Player " << p->playername << " has left the game.\n";
+    cout << "Player " << p->playername << " has left the game.\n\r";
     //SendToAll ("Player " + p->playername + " has left the game.\n", p);   
     SendToAll (p->playername + messagemap["server_player_leaved"], p);   
     } /* end of properly connected */
@@ -114,7 +117,7 @@ void DoQuit (tPlayer * p, istream & sArgs)
 
 void lookObject (tPlayer * p, string & which)
   {
-  *p << "Looking at object " << which << "\n";
+  *p << "Looking at object " << which << "\n\r";
 
   // scan available objects and display information about them ...
   }  // end of lookObject
@@ -154,7 +157,7 @@ void DoLook (tPlayer * p, istream & sArgs)
     {
       if (exititer != r->exits.begin() && ++exititer == r->exits.end())
       {
-        *p << "和 " << (--exititer)->first;
+        *p << "和 " << tocapitals((--exititer)->first);
       }
       else
       {
@@ -162,10 +165,10 @@ void DoLook (tPlayer * p, istream & sArgs)
         {
           ++exititer;
         }
-        *p << (--exititer)->first << " ";
+        *p << tocapitals((--exititer)->first) << " ";
       }
     }
-    *p << "\n";        
+    *p << "\n\r";        
     }
   
   /* list other players in the same room */
@@ -180,17 +183,18 @@ void DoLook (tPlayer * p, istream & sArgs)
         otherp->IsPlaying () &&
         otherp->room == p->room)  // need to be in same room
       {
-      if (iOthers++ == 0)
-        *p << "You also see ";
-      else
-        *p << ", ";
-      *p << otherp->playername;
+      //if (iOthers++ == 0)
+      //  *p << "    You also see ";
+      //else
+      //  *p << ", ";
+      //*p << otherp->playername;
+      *p << "    " << otherp->playername << "\n\r";
       }
     }   /* end of looping through all players */
 
   /* If we listed anyone, finish up the line with a period, newline */
   if (iOthers)
-    *p << ".\n";
+    *p << ".\n\r";
 
   
 } // end of DoLook
@@ -202,9 +206,9 @@ void DoSay (tPlayer * p, istream & sArgs)
   p->NeedNoFlag ("gagged"); // can't if gagged
   string what = GetMessage (sArgs, "Say what?");  // what
   //*p << "You say, \"" << what << "\"\n";  // confirm
-  *p << p->playername << "：" << what << "\n";  // confirm
+  *p << p->playername << "：" << what << "\n\r";  // confirm
   //SendToAll (p->playername + " says, \"" + what + "\"\n", 
-  SendToAll (p->playername + "：" + what + "\n", 
+  SendToAll (p->playername + "：" + what + "\n\r", 
             p, p->room);  // say it
 } // end of DoSay 
 
@@ -216,28 +220,28 @@ void DoTell (tPlayer * p, istream & sArgs)
   tPlayer * ptarget = p->GetPlayer (sArgs, "Tell whom?", true);  // who
   string what = GetMessage (sArgs, "Tell " + p->playername + " what?");  // what  
   //*p << "You tell " << p->playername << ", \"" << what << "\"\n";     // confirm
-  *p << messagemap["server_tell_go_prefix"] << ptarget->playername << "：" << what << "\n";     // confirm
+  *p << messagemap["server_tell_go_prefix"] << ptarget->playername << "：" << what << "\n\r";     // confirm
   //*ptarget << p->playername << " tells you, \"" << what << "\"\n";    // tell them
-  *ptarget << p->playername << messagemap["server_tell_come_prefix"] << what << "\n";    // tell them
+  *ptarget << p->playername << messagemap["server_tell_come_prefix"] << what << "\n\r";    // tell them
 } // end of DoTell
 
 void DoSave  (tPlayer * p, istream & sArgs)
 {
   p->Save ();
-  *p << "Saved.\n";  
+  *p << "Saved.\n\r";  
 }
 
 void DoChat (tPlayer * p, istream & sArgs)
 {
   p->NeedNoFlag ("gagged"); // can't if gagged
   string what = GetMessage (sArgs, "Chat what?");  // what  
-  SendToAll (p->playername + " chats, \"" + what + "\"\n");  // chat it
+  SendToAll (p->playername + " chats, \"" + what + "\"\n\r");  // chat it
 }
 
 void DoEmote (tPlayer * p, istream & sArgs)
 {
   string what = GetMessage (sArgs, "Emote what?");  // what  
-  SendToAll (p->playername + " " + what + "\n", 0, p->room);  // emote it
+  SendToAll (p->playername + " " + what + "\n\r", 0, p->room);  // emote it
 }
 
 void DoWho (tPlayer * p, istream & sArgs)
@@ -255,12 +259,12 @@ void DoWho (tPlayer * p, istream & sArgs)
     if (pTarget->IsPlaying ())
       {
       *p << "  " << pTarget->playername << 
-            " in room " << pTarget->room << "\n";
+            " in room " << pTarget->room << "\n\r";
       ++count;
       } // end of if playing
     } // end of doing each player
   
-  *p << count << " player(s)\n";  
+  *p << count << " player(s)\n\r";  
 } // end of DoWho
 
 void DoSetFlag (tPlayer * p, istream & sArgs)
@@ -273,7 +277,7 @@ void DoSetFlag (tPlayer * p, istream & sArgs)
     throw runtime_error ("Flag already set.");
   
   ptarget->flags.insert (flag);   // set it
-  *p << "You set the flag '" << flag << "' for " << ptarget->playername << "\n";  // confirm
+  *p << "You set the flag '" << flag << "' for " << ptarget->playername << "\n\r";  // confirm
       
 } // end of DoSetFlag
 
@@ -287,7 +291,7 @@ void DoClearFlag (tPlayer * p, istream & sArgs)
     throw runtime_error ("Flag not set.");
 
   ptarget->flags.erase (flag);    // clear it
-  *p << "You clear the flag '" << flag << "' for " << ptarget->playername << "\n";  // confirm
+  *p << "You clear the flag '" << flag << "' for " << ptarget->playername << "\n\r";  // confirm
       
 } // end of DoClearFlag
 
@@ -295,7 +299,7 @@ void DoShutdown (tPlayer * p, istream & sArgs)
 {
   NoMore (p, sArgs);  // check no more input
   p->NeedFlag ("can_shutdown");
-  SendToAll (p->playername + " shuts down the game\n");
+  SendToAll (p->playername + " shuts down the game\n\r");
   bStopNow = true;
 } // end of DoShutdown
 
@@ -320,9 +324,9 @@ void DoGoTo (tPlayer * p, istream & sArgs)
 
   // move player
   PlayerToRoom (p, room,
-                MAKE_STRING ("You go to room " << room << "\n"),
-                p->playername + " disappears in a puff of smoke!\n",
-                p->playername + " appears in a puff of smoke!\n");
+                MAKE_STRING ("You go to room " << room << "\n\r"),
+                p->playername + " disappears in a puff of smoke!\n\r",
+                p->playername + " appears in a puff of smoke!\n\r");
   
   } // end of DoGoTo
   
@@ -339,13 +343,13 @@ void DoTransfer (tPlayer * p, istream & sArgs)
   
   NoMore (p, sArgs);  // check no more input  
 
-  *p << "You transfer " <<  ptarget->playername << " to room " << room << "\n";
+  *p << "You transfer " <<  ptarget->playername << " to room " << room << "\n\r";
   
    // move player
   PlayerToRoom (ptarget, room,
-                p->playername + " transfers you to another room!\n",
-                ptarget->playername + " is yanked away by unseen forces!\n",
-                ptarget->playername + " appears breathlessly!\n");
+                p->playername + " transfers you to another room!\n\r",
+                ptarget->playername + " is yanked away by unseen forces!\n\r",
+                ptarget->playername + " appears breathlessly!\n\r");
      
 } // end of DoTransfer
 
@@ -357,6 +361,14 @@ void ProcessCommand (tPlayer * p, istream & sArgs)
   string command;
   sArgs >> command >> ws;   // get command, eat whitespace after it
   
+  command = tolower(command);
+
+  string args;
+  getline(sArgs,args);
+  args = tolower(args);
+  args = translate_to_charset("utf-8","gb2312",args,1024);
+  istringstream is (args);
+
   // check command alias map
   map<string, string, ciLess>::const_iterator cmd_alias_itr = commandaliasmap.find (command);
   if (cmd_alias_itr != commandaliasmap.end())
@@ -375,7 +387,8 @@ void ProcessCommand (tPlayer * p, istream & sArgs)
     if (command_iter == commandmap.end ())
        throw runtime_error ("Huh?");      // don't get it
  
-    command_iter->second (p, sArgs);  // execute command (eg. DoLook)
+    //command_iter->second (p, sArgs);  // execute command (eg. DoLook)
+    command_iter->second (p, is);  // execute command (eg. DoLook)
     }
 } /* end of ProcessCommand */
 
