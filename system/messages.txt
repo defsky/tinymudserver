@@ -8,6 +8,7 @@ error_password_blank                        请输入密码
 error_password_incorrect                    角色ID或密码不正确
 error_password_confirm_failed               两次密码不一致
 error_not_exist                             那边好像没有路
+error_surname_cleared                       中文名被重置
 server_new_connection                       %rWelcome to the MUD World.
 server_down                                 %r%r** 服务器已关闭 **%r%r
 server_flag_blocked                         你被禁止连接到服务器
@@ -15,9 +16,9 @@ server_password_attempt_exceeded            密码尝试次数过多！%r
 server_connected_players                    在线玩家：
 server_tell_go_prefix                       你悄悄地告诉
 server_tell_come_prefix                     悄悄地告诉你：
-server_exits_prefix                         这里明显的出口是：
-server_player_joined                        从这个世界的某个角落上线了%r
-server_player_leaved                        从这个世界的某个角落下线了%r
+server_exits_prefix                         这里明显的出口有
+server_player_joined                        从某个角落悄悄地上线了%r
+server_player_leaved                        悄无声息地下线了%r
 server_goodbye                              %r%r记得常回来看看...%r%r
 prompt_name                                 请输入角色ID，或者输入(new)创建新角色：
 prompt_new_name                             请输入新的角色ID：

@@ -37,7 +37,7 @@ void PeriodicUpdates ()
   if (time (NULL) > (tLastMessage + MESSAGE_INTERVAL))
     {
     //SendToAll ("You hear creepy noises ...\n");
-    SendToAll ("游戏大厅传来一阵嘈杂的声音 ...\n");
+    SendToAll ("游戏大厅传来一阵嘈杂的声音 ...\n\r");
     tLastMessage = time (NULL);
     }
     

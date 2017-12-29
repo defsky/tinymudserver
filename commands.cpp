@@ -157,7 +157,7 @@ void DoLook (tPlayer * p, istream & sArgs)
     {
       if (exititer != r->exits.begin() && ++exititer == r->exits.end())
       {
-        *p << "和 " << tocapitals((--exititer)->first);
+        *p << " 和 " << (--exititer)->first;
       }
       else
       {
@@ -165,7 +165,7 @@ void DoLook (tPlayer * p, istream & sArgs)
         {
           ++exititer;
         }
-        *p << tocapitals((--exititer)->first) << " ";
+        *p << " " << (--exititer)->first;
       }
     }
     *p << "\n\r";        
@@ -183,7 +183,8 @@ void DoLook (tPlayer * p, istream & sArgs)
         otherp->IsPlaying () &&
         otherp->room == p->room)  // need to be in same room
       {
-      //if (iOthers++ == 0)
+      if (iOthers++ == 0)
+        *p << "\n\r";
       //  *p << "    You also see ";
       //else
       //  *p << ", ";
@@ -194,7 +195,7 @@ void DoLook (tPlayer * p, istream & sArgs)
 
   /* If we listed anyone, finish up the line with a period, newline */
   if (iOthers)
-    *p << ".\n\r";
+    *p << "\n\r";
 
   
 } // end of DoLook
