@@ -1,0 +1,9 @@
+can_goto                  可以使用goto命令
+can_setflag               可以使用setflag命令
+can_shutdown              可以使用shutdown命令
+can_transfer              可以使用transfer命令
+eep
+blocked                   帐号禁用
+gagged                    禁言
+need_new_name             下次上线重置中文名
+need_new_id               下次上线重置用户ID

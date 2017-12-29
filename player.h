@@ -41,7 +41,9 @@ private:
 public:
   tConnectionStates connstate;      /* connection state */
   string prompt;      // the current prompt
-  string playername;  // player name
+  string playername;  // player id
+  string surname      // chinese name
+  string fullname     // chinese name(player id)
   string password;    // their password
   int badPasswordCount;   // password guessing attempts
   int room;         // what room they are in

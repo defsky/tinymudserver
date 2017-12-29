@@ -26,7 +26,11 @@ NO WARRANTY
 
  This software is provided "as is" without express or implied
 warranty, and with no claim as to its suitability for any purpose.
- 
+
+DEPENDENCES
+1 libiconv-l.15
+  下载地址：http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz
+  
 INSTALLATION
 
  The simplest way to compile the program is to type "make". This should use the
@@ -75,6 +79,7 @@ DESCRIPTION
  * Loads room descriptions and exits from a disk file
  * Loads messages from a disk file
  * Loads control parameters from a disk file
+ * 从文件加载命令别名
  
 WHAT YOU COULD ADD
 
