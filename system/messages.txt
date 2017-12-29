@@ -9,16 +9,21 @@ error_password_incorrect                    角色ID或密码不正确
 error_password_confirm_failed               两次密码不一致
 error_not_exist                             那边好像没有路
 error_surname_cleared                       中文名被重置
+error_surname_blank                         中文名不能为空
+error_surname_invalid                       无效的中文名
 server_new_connection                       %rWelcome to the MUD World.
 server_down                                 %r%r** 服务器已关闭 **%r%r
 server_flag_blocked                         你被禁止连接到服务器
 server_password_attempt_exceeded            密码尝试次数过多！%r
 server_connected_players                    在线玩家：
-server_tell_go_prefix                       你悄悄地告诉
-server_tell_come_prefix                     悄悄地告诉你：
+server_tell_go_prefix                       你悄悄地对
+server_tell_come_prefix                     悄悄地对你说：
 server_exits_prefix                         这里明显的出口有
 server_player_joined                        从某个角落悄悄地上线了%r
 server_player_leaved                        悄无声息地下线了%r
+server_existing_player_login                欢迎回来!%r%r
+server_player_disappear                     消失在了一团烟雾中。%r
+server_player_appear                        从一团烟雾中走了出来。%r
 server_goodbye                              %r%r记得常回来看看...%r%r
 prompt_name                                 请输入角色ID，或者输入(new)创建新角色：
 prompt_new_name                             请输入新的角色ID：
@@ -30,6 +35,5 @@ prompt_flag_blocked                         再见！%r
 banner %r|----------------------- 未知世界 ------------------------|%r|%r|    欢迎来到这个未知的世界，开启属于自己的冒险之旅。%r|%r|%r|%r|%r|%r|                                          Powered by def%r----------------------------------------------------------|%r%r
 welcome %r你好, 
 new_player 欢迎来到MUD世界! 请查看帮助(help)文档了解我们的规则 :)%r%r
-existing_player 欢迎回来!%r%r
 motd 今日信息:今天没有值得一提的新闻%r%r
 help %r%r---- 帮助手册 ----%r%rlook - 查看周围环境%rquit - 离开游戏%rsay - 在当前房间说话%rtell <player> - 对玩家说话%rshutdown - 关闭MUD服务器%rhelp - 帮助文档%rgoto <room> - 去指定ID的房间%rtransfer <player> [<room>] - 传送玩家到当前房间或指定ID的房间%rsetflag <player> <flag> - 为玩家设置一个标记%rclearflag <player> <flag> - 清除之前为玩家设置的标记%r%r

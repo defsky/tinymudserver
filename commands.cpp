@@ -90,8 +90,8 @@ void DoDirection (tPlayer * p, const string & sArgs)
   PlayerToRoom (p, exititer->second,
                 //"You go " + sArgs + "\n",
                 "",
-                p->playername + " goes " + sArgs + "\n\r",
-                p->playername + " enters.\n\r");
+                p->GetFullname() + " goes " + sArgs + "\n\r",
+                p->GetFullname() + " enters.\n\r");
   
   } // end of DoDirection
   
@@ -109,7 +109,7 @@ void DoQuit (tPlayer * p, istream & sArgs)
     *p << messagemap["server_goodbye"];
     cout << "Player " << p->playername << " has left the game.\n\r";
     //SendToAll ("Player " + p->playername + " has left the game.\n", p);   
-    SendToAll (p->playername + messagemap["server_player_leaved"], p);   
+    SendToAll (p->GetFullname() + messagemap["server_player_leaved"], p);   
     } /* end of properly connected */
 
   p->ClosePlayer ();
@@ -183,13 +183,9 @@ void DoLook (tPlayer * p, istream & sArgs)
         otherp->IsPlaying () &&
         otherp->room == p->room)  // need to be in same room
       {
-      if (iOthers++ == 0)
-        *p << "\n\r";
-      //  *p << "    You also see ";
-      //else
-      //  *p << ", ";
-      //*p << otherp->playername;
-      *p << "    " << otherp->playername << "\n\r";
+      if (iOthers++ == 0) *p << "\n\r";
+
+      *p << "    " << otherp->GetFullname() << "\n\r";
       }
     }   /* end of looping through all players */
 
@@ -206,10 +202,10 @@ void DoSay (tPlayer * p, istream & sArgs)
 {
   p->NeedNoFlag ("gagged"); // can't if gagged
   string what = GetMessage (sArgs, "Say what?");  // what
-  //*p << "You say, \"" << what << "\"\n";  // confirm
-  *p << p->playername << "：" << what << "\n\r";  // confirm
+  // confirm
+  *p << p->GetFullname() << "说道：" << what << "\n\r";  // confirm
   //SendToAll (p->playername + " says, \"" + what + "\"\n", 
-  SendToAll (p->playername + "：" + what + "\n\r", 
+  SendToAll (p->GetFullname() + "：" + what + "\n\r", 
             p, p->room);  // say it
 } // end of DoSay 
 
@@ -220,10 +216,8 @@ void DoTell (tPlayer * p, istream & sArgs)
   p->NeedNoFlag ("gagged"); // can't if gagged
   tPlayer * ptarget = p->GetPlayer (sArgs, "Tell whom?", true);  // who
   string what = GetMessage (sArgs, "Tell " + p->playername + " what?");  // what  
-  //*p << "You tell " << p->playername << ", \"" << what << "\"\n";     // confirm
-  *p << messagemap["server_tell_go_prefix"] << ptarget->playername << "：" << what << "\n\r";     // confirm
-  //*ptarget << p->playername << " tells you, \"" << what << "\"\n";    // tell them
-  *ptarget << p->playername << messagemap["server_tell_come_prefix"] << what << "\n\r";    // tell them
+  *p << messagemap["server_tell_go_prefix"] << ptarget->GetFullname() << "说：" << what << "\n\r";     // confirm
+  *ptarget << p->GetFullname() << messagemap["server_tell_come_prefix"] << what << "\n\r";    // tell them
 } // end of DoTell
 
 void DoSave  (tPlayer * p, istream & sArgs)
@@ -236,13 +230,13 @@ void DoChat (tPlayer * p, istream & sArgs)
 {
   p->NeedNoFlag ("gagged"); // can't if gagged
   string what = GetMessage (sArgs, "Chat what?");  // what  
-  SendToAll (p->playername + " chats, \"" + what + "\"\n\r");  // chat it
+  SendToAll ("【闲聊】" + p->GetFullname() + "：" + what + "\n\r");  // chat it
 }
 
 void DoEmote (tPlayer * p, istream & sArgs)
 {
   string what = GetMessage (sArgs, "Emote what?");  // what  
-  SendToAll (p->playername + " " + what + "\n\r", 0, p->room);  // emote it
+  SendToAll (p->GetFullname() + what + "\n\r", 0, p->room);  // emote it
 }
 
 void DoWho (tPlayer * p, istream & sArgs)
@@ -259,7 +253,7 @@ void DoWho (tPlayer * p, istream & sArgs)
     tPlayer * pTarget = *iter;    // the player  
     if (pTarget->IsPlaying ())
       {
-      *p << "  " << pTarget->playername << 
+      *p << "  " << pTarget->GetFullname() << 
             " in room " << pTarget->room << "\n\r";
       ++count;
       } // end of if playing
@@ -326,8 +320,8 @@ void DoGoTo (tPlayer * p, istream & sArgs)
   // move player
   PlayerToRoom (p, room,
                 MAKE_STRING ("You go to room " << room << "\n\r"),
-                p->playername + " disappears in a puff of smoke!\n\r",
-                p->playername + " appears in a puff of smoke!\n\r");
+                p->GetFullname() + messagemap["server_player_disappear"],
+                p->GetFullname() + messagemap["server_player_appear"]);
   
   } // end of DoGoTo
   

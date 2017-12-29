@@ -16,8 +16,10 @@ typedef enum
 {
   eAwaitingName,        // we want their player name
   eAwaitingPassword,    // we want their old password
+  eAwaitingSurname,
   
   eAwaitingNewName,     // they have typed 'new' and are being asked for a new name
+  eAwaitingNewSurname,
   eAwaitingNewPassword, // we want a new password
   eConfirmPassword,     // confirm the new password
   
@@ -42,8 +44,7 @@ public:
   tConnectionStates connstate;      /* connection state */
   string prompt;      // the current prompt
   string playername;  // player id
-  string surname      // chinese name
-  string fullname     // chinese name(player id)
+  string surname;      // chinese name
   string password;    // their password
   int badPasswordCount;   // password guessing attempts
   int room;         // what room they are in
@@ -68,10 +69,11 @@ public:
     connstate = eAwaitingName;
     room = INITIAL_ROOM;
     flags.clear ();
-    //prompt = "Enter your name, or 'new' to create a new character ...  "; 
     prompt = messagemap["prompt_name"]; 
     }
     
+  // fullname format: chinesename(playerid)
+  string GetFullname() const { return surname + "(" + playername + ")";}
   // what's our socket?
   int GetSocket () const { return s; }
   // true if connected at all
