@@ -240,7 +240,7 @@ void ProcessNewConnection ()
             ", port " << port << endl;
       
     //*p << "\nWelcome to the Tiny MUD Server version " << VERSION << "\n"; 
-    *p << messagemap ["new_connection"] << "\n"; 
+    *p << messagemap ["server_new_connection"] << "\n"; 
     *p << messagemap ["banner"];   // message from message file
     *p << p->prompt;    // initial prompt (Enter your name ...)
     
@@ -281,7 +281,7 @@ void ProcessPlayerInput (tPlayer * p, const string & s)
   // all errors during input processing will be caught here
   catch (runtime_error & e)
     {
-    *p << e.what () << "\n";    
+    *p << e.what () << "\n\r";    
     }
   
   *p << p->prompt;   // re-prompt them

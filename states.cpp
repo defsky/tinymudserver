@@ -28,7 +28,7 @@ void PlayerEnteredGame (tPlayer * p, const string & message)
 {
   p->connstate = ePlaying;    // now normal player
   p->prompt = PROMPT;         // default prompt
-  *p << messagemap ["welcome"] << p->playername << "\n\n"; // greet them
+  *p << messagemap ["welcome"] << p->playername << "\n\n\r"; // greet them
   *p << message;
   *p << messagemap ["motd"];  // message of the day
   p->DoCommand ("look");     // new player looks around
